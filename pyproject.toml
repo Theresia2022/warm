@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "warm-video-materialization"
+version = "0.1.0"
+description = "WARM: workload-aware replica materialization for video query serving"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24", "pandas>=1.5", "PyYAML>=6.0", "torch>=2.0", "scikit-learn>=1.2"]
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[project.scripts]
+warm = "warm.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

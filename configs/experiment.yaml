@@ -1,0 +1,183 @@
+# WARM algorithm-study settings based on supplied paper_full.yaml.
+# Numeric experiment settings preserved except removed predictor-only settings.
+# Zero-padded original noise seeds are expressed as decimal 413, 818, 1207.
+seed: 42
+predictor_train_file: train.json
+predictor_test_file: test.json
+library_video_count: 1500
+require_exact_library_size: true
+budget_ratios:
+- 0.02
+- 0.05
+- 0.1
+- 0.15
+- 0.2
+- 0.25
+- 0.3
+- 0.4
+- 0.5
+methods:
+- vstore_coalesce
+- prior_vsa_dp
+- prior_vss_cache
+- prior_zhao_version
+- source_only
+- warm
+- static_density
+- popularity_first
+- smallest_storage
+- benefit_only
+workload_seeds:
+- 20200703
+- 20210709
+- 20220121
+- 20220812
+- 20230303
+- 20240127
+- 20260924
+bootstrap_samples: 2000
+secondary_budget_ratio: 0.1
+load_factors:
+- 0.5
+- 0.8
+- 1.0
+- 1.2
+- 1.5
+- 2.0
+load_sweep_query_count: 100000
+overlap_requests_per_video: 5
+overlap_modes:
+- low
+- natural
+- high
+global_budget_ratios:
+- 0.05
+- 0.1
+- 0.2
+- 0.3
+- 0.4
+- 0.5
+request_scale_values:
+- 8
+- 16
+- 32
+noise_levels:
+- 0.0
+- 0.05
+- 0.1
+- 0.2
+- 0.3
+noise_seeds:
+- 413
+- 818
+- 1207
+robust_beta_for_noise: 1.0
+decision_ablation_budget_ratios:
+- 0.005
+- 0.01
+- 0.02
+- 0.05
+- 0.075
+decision_ablation_seeds:
+- 20220812
+- 20230303
+- 20240127
+- 20260924
+candidate:
+  widths:
+  - 360
+  - 540
+  - 720
+  - 1280
+  - 1920
+  - 3840
+  frame_rates:
+  - 15.0
+  - 20.0
+  - 30.0
+  - 45.0
+  - 60.0
+  qualities:
+  - 0.25
+  - 0.33
+  - 0.5
+  - 1.0
+  codecs:
+  - h264
+  - hevc
+  - wmv
+  params:
+  - 1
+  - 3
+  - 5
+  logical_only_not_richer_than_source: true
+workload:
+  total_historical_queries: 1000000
+  video_distribution: zipf
+  video_alpha: 1.0
+  request_distribution: zipf
+  request_alpha: 0.5
+  max_requests_per_video: 32
+  request_widths:
+  - 360
+  - 480
+  - 540
+  - 720
+  - 960
+  - 1280
+  - 1600
+  - 1920
+  - 2560
+  - 3840
+  request_frame_rates:
+  - 10.0
+  - 15.0
+  - 20.0
+  - 24.0
+  - 30.0
+  - 45.0
+  - 60.0
+  logical_coverage_only: true
+  strict_codec: false
+  quality_constraint: false
+predictor:
+  kind: fnn
+  hidden_dims:
+  - 128
+  - 64
+  head_dim: 32
+  dropout: 0.1
+  learning_rate: 0.001
+  weight_decay: 1.0e-05
+  batch_size: 2048
+  epochs: 120
+  patience: 12
+  huber_delta: 1.0
+  storage_loss_weight: 1.0
+  decode_loss_weight: 1.0
+  seed: 42
+  calibration_ratio: 0.15
+optimizer:
+  beta_storage: 0.0
+  beta_decode: 0.0
+  enable_dominance_pruning: true
+  enable_lazy: true
+  enable_best_singleton: true
+  min_gain: 1.0e-12
+  enforce_true_budget_at_materialization: true
+prior_vsa:
+  max_versions: 4
+  capacity_bins: 2048
+prior_vss:
+  history_queries: 20000
+  per_video_budget_multiplier: 10.0
+  redundancy_weight: 1.0
+  trace_seed: 1217
+serving:
+  workers: 8
+  query_count: 75000
+  arrival_process: poisson
+  offered_load: 0.8
+  seed: 20221111
+  sla_seconds: 0.3
+  routing_policy: min_cost
