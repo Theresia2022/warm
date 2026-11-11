@@ -2,7 +2,7 @@
 
 WARM studies workload-aware physical design for video repositories. Given source-video characteristics, a query workload, and a shared storage budget, it determines which video replicas should be selected for advance materialization to reduce expected query-serving time.
 
-![](./warm_pipeline.png)
+<img src=".\warm_pipeline.png" style="zoom:50%;" />
 
 The repository provides an implementation of WARM's replica-selection algorithm, supporting components for workload and candidate modeling, and comparison methods evaluated within a common planning interface. It is intended for researchers interested in workload-aware storage design, video representation management, and budget-constrained selection algorithms.
 
