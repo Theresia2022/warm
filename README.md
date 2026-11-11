@@ -13,7 +13,7 @@ A video repository may receive requests with different resolution and frame-rate
 WARM models these interactions using the minimum serving cost available to each query. For a query $q$ and a selected replica set $A$, let $t_0(q)$ denote its source-only serving cost and $t(q,c)$ the cost of serving it using candidate replica \(c\). An incompatible replica is treated as having infinite serving cost. The resulting serving cost is
 
 $$
-T(q,A)=\min\left\{t_0(q),\min_{c\in A}t(q,c)\right\}.
+T(q,A)=\min\{t_0(q),\min_{c\in A}t(q,c)\}.
 $$
 
 Given query probabilities $p(q)$, WARM maximizes the expected serving-time saving
